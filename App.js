@@ -10,13 +10,18 @@ function doSomething() {
 
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState("");
+  const [courseGoals, setCourseGoals] = useState([]);
+
+  consy goalInputHandler = (enteredText) => {
+    setEnteredGoal(enteredText);
+  };
 
   goalInputHandler = (enteredText) => {
     setEnteredGoal(enteredText);
   };
 
   const addGoalHandler = () => {
-    console.log(enteredGoal);
+    setCourseGoals(currentGoals => [...currentGoals, enteredGoal]);
   };
 
   return (
@@ -34,6 +39,11 @@ export default function App() {
         <View style={styles.box} />
         <View style={styles.box} />
         <View style={styles.box} />
+        {courseGoals.map(goal => (
+        <Veiw st={style=styles.listItem}>
+          <Text>{goal}</Text>
+          </Veiw>
+        ))}
       </View>
     </View>
   );
@@ -55,13 +65,23 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   box: {
-    width: 100,
+    width: 1000,
     height: 100,
     backgroundColor: "lightblue",
+    borderColor: "black",
+    borderWidth: 1,
+    padding: 10, 
   },
   boxContainer: {
     alignItems: "center",
     justifyContent: "space-around",
     flexDirection: "row",
+  }
+  listItem: {
+    padding: 10,
+    marginVertical: 10, 
+    backgroundColor: '#ccc',
+    borderColor: 'black',
+    borderWidth: 1
   }
 });
