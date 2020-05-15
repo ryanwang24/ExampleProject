@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, TextInput, View, Button } from "react-native";
+import { StyleSheet, TextInput, View, Button, Text, FlatList, } from "react-native";
 
 function doSomething() {
   var x = 0;
@@ -12,11 +12,7 @@ export default function App() {
   const [enteredGoal, setEnteredGoal] = useState("");
   const [courseGoals, setCourseGoals] = useState([]);
 
-  consy goalInputHandler = (enteredText) => {
-    setEnteredGoal(enteredText);
-  };
-
-  goalInputHandler = (enteredText) => {
+  const goalInputHandler = (enteredText) => {
     setEnteredGoal(enteredText);
   };
 
@@ -35,16 +31,15 @@ export default function App() {
         />
         <Button title="ADD" onPress={addGoalHandler} />
       </View>
+      <FlatList
+      keyExtractor={(item, index) => item.id}
+      data={courseGoals}
+      renderItem={itemData => (
       <View style={styles.boxContainer}>
-        <View style={styles.box} />
-        <View style={styles.box} />
-        <View style={styles.box} />
         {courseGoals.map(goal => (
-        <Veiw st={style=styles.listItem}>
-          <Text>{goal}</Text>
-          </Veiw>
-        ))}
-      </View>
+  
+        )}
+      />
     </View>
   );
 }
@@ -76,12 +71,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     flexDirection: "row",
-  }
+  },
   listItem: {
     padding: 10,
     marginVertical: 10, 
     backgroundColor: '#ccc',
     borderColor: 'black',
-    borderWidth: 1
-  }
+    borderWidth: 1,
+  },
 });
