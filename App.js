@@ -1,6 +1,14 @@
 import React, { useState } from "react";
-import { StyleSheet, TextInput, View, Button, Text, FlatList, } from "react-native";
-
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  Button,
+  Text,
+  FlatList,
+} from "react-native";
+import GoalItem from "./GoalItem";
+import Box from "./Box";
 function doSomething() {
   var x = 0;
   console.log("x is equal to: " + x);
@@ -17,7 +25,7 @@ export default function App() {
   };
 
   const addGoalHandler = () => {
-    setCourseGoals(currentGoals => [...currentGoals, enteredGoal]);
+    setCourseGoals((currentGoals) => [...currentGoals, enteredGoal]);
   };
 
   return (
@@ -32,15 +40,13 @@ export default function App() {
         <Button title="ADD" onPress={addGoalHandler} />
       </View>
       <FlatList
-      keyExtractor={(item, index) => item.id}
-      data={courseGoals}
-      renderItem={itemData => (
-      <View style={styles.boxContainer}>
-        {courseGoals.map(goal => (
-  
-        )}
+        keyExtractor={(item, index) => item.id}
+        data={courseGoals}
+        renderItem={(itemData) => <GoalItem title={itemData.item} />}
       />
+      <Box/>
     </View>
+    
   );
 }
 
@@ -65,18 +71,11 @@ const styles = StyleSheet.create({
     backgroundColor: "lightblue",
     borderColor: "black",
     borderWidth: 1,
-    padding: 10, 
+    padding: 10,
   },
   boxContainer: {
     alignItems: "center",
     justifyContent: "space-around",
     flexDirection: "row",
-  },
-  listItem: {
-    padding: 10,
-    marginVertical: 10, 
-    backgroundColor: '#ccc',
-    borderColor: 'black',
-    borderWidth: 1,
   },
 });
